@@ -1,5 +1,6 @@
-import DinamicEditIcon from "/public/assets/icons/dinamicEditIcon";
 import { Link } from "react-router-dom";
+
+import editIcon from "/public/assets/icons/editIcon.svg";
 
 type EditButtonProps = {
   userId: string;
@@ -11,9 +12,7 @@ const EditButtonProfile = ({ userId }: EditButtonProps) => {
       className="shad-button_dark_no_h h  group"
       aria-label="Boton editar perfil"
     >
-      {" "}
-      {<DinamicEditIcon color="#FFB620" height={16} width={16} />}
-      {/* <img src='/public/assets/icons/edit.svg' alt="Edit icon" className='fill-slate-300' height={16} width={16} /> */}
+      <image src={editIcon} alt="edit Icon" />
       <p className="subtle-semibold">Edit Profile</p>
     </Link>
   );
