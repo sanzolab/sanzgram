@@ -12,11 +12,9 @@
   body {
     @apply bg-dark-1 text-white min-h-screen font-inter;
   }
-
 }
 
 @layer utilities {
-
   /* TYPOGRAPHY */
   .h1-bold {
     @apply text-[36px] font-bold leading-[140%] tracking-tighter;
@@ -172,7 +170,7 @@
 
   /* Profile */
   .profile-container {
-    @apply flex flex-col items-center flex-1 gap-10 overflow-scroll py-10 px-5 md:p-14 custom-scrollbar;
+    @apply flex flex-col  flex-1 gap-10 overflow-scroll py-10 px-5 md:p-14 custom-scrollbar;
   }
 
   .profile-inner_container {
@@ -184,7 +182,7 @@
   }
 
   .tab-list:first-child {
-    @apply rounded-tl
+    @apply rounded-tl;
   }
 
   /* Saved */
@@ -230,12 +228,12 @@
 
   .grid-cols-auto-fit {
     grid-template-columns: repeat(auto-fill, minmax(193px, 1fr));
-    @apply gap-7
+    @apply gap-4;
   }
 
   .grid-cols-auto-fit-medium {
     grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-    @apply gap-4
+    @apply gap-4;
   }
 
   .grid-post_link {
@@ -259,14 +257,13 @@
     @apply rounded-lg base-medium hover:bg-light-4 transition;
   }
 
-
   .link-active {
-    @apply relative
+    @apply relative;
   }
 
   .link-active::before {
-    content: '';
-    @apply absolute -left-11 top-1/2 transform -translate-y-1/2 w-6 h-14 rounded-full bg-primary-500 shadow-custom-green
+    content: "";
+    @apply absolute -left-11 top-1/2 transform -translate-y-1/2 w-6 h-14 rounded-full bg-primary-500 shadow-custom-green;
   }
 
   /* Post Card */
@@ -290,7 +287,6 @@
 }
 
 @layer components {
-
   /* SHADCN COMPONENTS */
   /* Form */
   .shad-form_label {
@@ -319,7 +315,7 @@
   }
 
   .shad-button_dark_no_h {
-    @apply bg-[#101012] px-5 text-light-1 flex gap-2 p-4 !important;
+    @apply bg-[#101012] px-5 text-light-1 flex h-fit gap-2 p-4 !important;
   }
 
   .shad-button_ghost {
