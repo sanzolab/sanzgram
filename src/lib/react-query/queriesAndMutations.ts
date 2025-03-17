@@ -56,7 +56,7 @@ export const useSignInAccount = () => {
   return useMutation({
     mutationFn: (user: { email: string; password: string }) =>
       signInAccount(user),
-  }); 
+  });
 };
 /**
  * Returns a mutation hook for signing out an account.
