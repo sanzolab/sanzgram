@@ -480,12 +480,37 @@ export async function getInfinitePosts({ pageParam }: { pageParam: number }) {
   }
 }
 
-export async function getInfiniteUsers({ pageParam }: { pageParam: number }) {
+// export async function getInfiniteUsers({ pageParam }: { pageParam: number }) {
+//   try {
+//     const queries = [Query.limit(2)];
+
+//     if (pageParam) {
+//       queries.push(Query.cursorAfter(pageParam.toString()));
+//     }
+
+//     const users = await databases.listDocuments(
+//       appwriteConfig.databaseId,
+//       appwriteConfig.userCollectionId,
+//       queries
+//     );
+//     if (!users) throw Error;
+
+//     return users;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
+
+export async function getInfiniteUsers({
+  pageParam,
+}: {
+  pageParam: string | null;
+}) {
   try {
-    const queries = [Query.limit(20)];
+    const queries = [Query.limit(3)];
 
     if (pageParam) {
-      queries.push(Query.cursorAfter(pageParam.toString()));
+      queries.push(Query.cursorAfter(pageParam));
     }
 
     const users = await databases.listDocuments(
@@ -493,6 +518,7 @@ export async function getInfiniteUsers({ pageParam }: { pageParam: number }) {
       appwriteConfig.userCollectionId,
       queries
     );
+
     if (!users) throw Error;
 
     return users;
