@@ -3,6 +3,7 @@ import {
   useMutation,
   useQueryClient,
   useInfiniteQuery,
+  UseInfiniteQueryResult,
 } from "@tanstack/react-query";
 import {
   CreateUserAccount,
@@ -34,6 +35,11 @@ import {
 } from "@/types";
 import { QUERY_KEYS } from "./QUERY_KEYS";
 import { useUserContext } from "@/context/AuthContext";
+import { Models } from "appwrite";
+
+interface DocumentList<T> {
+  documents: T[];
+}
 
 /**
  * Returns a mutation hook for creating a new user account.
@@ -202,6 +208,8 @@ export const useSavePost = () => {
  * @param {string} userId - The ID of the user whose saved posts are being fetched.
  * @return {IUseGetSavedPostResult} - An object containing the fetched data and functions to fetch more data.
  */
+
+// @ts-expect-error
 export const useGetSavedPost = (
   userId: string,
   options = {}
@@ -260,17 +268,68 @@ export const useGetUserById = (userId: string) => {
   });
 };
 
-export const useGetUser = () => {
-  return useInfiniteQuery({
+// export const useGetUser = () => {
+//   return useInfiniteQuery({
+//     queryKey: [QUERY_KEYS.GET_INFINITY_USERS],
+//     queryFn: getInfiniteUsers,
+//     getNextPageParam: (lastPage) => {
+//       if (lastPage && lastPage.documents.length === 0) return null;
+//       const lastId = lastPage?.documents[lastPage.documents.length - 1].$id;
+//       return lastId;
+//     },
+//     initialPageParam: 0,
+//   });
+// };
+
+export const useGetUser = (): UseInfiniteQueryResult<
+  DocumentList<Models.Document>,
+  Error
+> => {
+  return useInfiniteQuery<
+    DocumentList<Models.Document>,
+    Error,
+    DocumentList<Models.Document>,
+    [string]
+  >({
     queryKey: [QUERY_KEYS.GET_INFINITY_USERS],
-    queryFn: getInfiniteUsers,
-    getNextPageParam: (lastPage) => {
-      if (lastPage && lastPage.documents.length === 0) return null;
-      const lastId = lastPage?.documents[lastPage.documents.length - 1].$id;
-      return lastId;
+    queryFn: async ({ pageParam = null }) => {
+      const result = await getInfiniteUsers({ pageParam: pageParam as string });
+      return result ?? { documents: [] };
     },
+    getNextPageParam: (lastPage) => {
+      if (!lastPage || lastPage.documents.length === 0) return null;
+      return lastPage.documents[lastPage.documents.length - 1].$id ?? null;
+    },
+    initialPageParam: 0,
   });
 };
+
+// export const useGetUser = (): UseInfiniteQueryResult<
+//   DocumentList<Models.Document>,
+//   Error
+// > => {
+//   return useInfiniteQuery<
+//     DocumentList<Models.Document>,
+//     Error,
+//     DocumentList<Models.Document>,
+//     [string]
+//   >({
+//     queryKey: [QUERY_KEYS.GET_INFINITY_USERS],
+//     queryFn: async ({ pageParam }) => {
+//       const result = await getInfiniteUsers({ pageParam: pageParam as string });
+//       if (!result) {
+//         return { documents: [] };
+//       }
+//       return result;
+//     },
+//     getNextPageParam: (lastPage) => {
+//       if (lastPage && lastPage.documents.length === 0) return null;
+//       const lastId = lastPage?.documents[lastPage.documents.length - 1].$id;
+//       return lastId;
+//     },
+//     initialPageParam: 0,
+//   });
+// };
 
 export const useGetPostById = (postId: string) => {
   return useQuery({
@@ -303,19 +362,50 @@ export const useDeletePost = () => {
   });
 };
 
-export const useGetPosts = () => {
-  return useInfiniteQuery({
+// export const useGetPosts = () => {
+//   return useInfiniteQuery({
+//     queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
+//     queryFn: getInfinitePosts,
+//     getNextPageParam: (lastPage) => {
+//       if (lastPage && lastPage.documents.length === 0) return null;
+//       const lastId = lastPage?.documents[lastPage.documents.length - 1].$id;
+//       return lastId;
+//     },
+//     initialPageParam: 0,
+//   });
+// };
+
+// interface Document {
+//   $id: string;
+//   // otras propiedades del documento
+// }
+
+export const useGetPosts = (): UseInfiniteQueryResult<
+  DocumentList<Models.Document>,
+  Error
+> => {
+  return useInfiniteQuery<
+    DocumentList<Models.Document>,
+    Error,
+    DocumentList<Models.Document>,
+    [string]
+  >({
     queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
-    queryFn: getInfinitePosts,
+    queryFn: async ({ pageParam }) => {
+      const result = await getInfinitePosts({ pageParam: pageParam as number });
+      if (!result) {
+        return { documents: [] };
+      }
+      return result;
+    },
     getNextPageParam: (lastPage) => {
-      if (lastPage && lastPage.documents.length === 0) return null;
-      const lastId = lastPage?.documents[lastPage.documents.length - 1].$id;
+      if (lastPage.documents.length === 0) return null;
+      const lastId = lastPage.documents[lastPage.documents.length - 1].$id;
       return lastId;
     },
     initialPageParam: 0,
   });
 };
-
 export const useSearchPosts = (searchTerm: string) => {
   return useQuery({
     queryKey: [QUERY_KEYS.SEARCH_POSTS, searchTerm],
