@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import editIcon from "/public/assets/icons/editIcon.svg";
+import editIcon from "assets/icons/editIcon.svg";
 
 type EditButtonProps = {
   userId: string;
@@ -12,7 +12,7 @@ const EditButtonProfile = ({ userId }: EditButtonProps) => {
       className="shad-button_dark_no_h h  group"
       aria-label="Boton editar perfil"
     >
-      <image src={editIcon} alt="edit Icon" />
+      <img src="/assets/icons/editIcon.svg" alt="logo" />
       <p className="subtle-semibold">Edit Profile</p>
     </Link>
   );
