@@ -209,7 +209,6 @@ export const useSavePost = () => {
  * @return {IUseGetSavedPostResult} - An object containing the fetched data and functions to fetch more data.
  */
 
-// @ts-expect-error
 export const useGetSavedPost = (
   userId: string,
   options = {}
