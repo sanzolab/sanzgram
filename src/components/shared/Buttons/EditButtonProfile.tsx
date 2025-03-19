@@ -9,7 +9,7 @@ const EditButtonProfile = ({ userId }: EditButtonProps) => {
   return (
     <Link
       to={`/update-profile/${userId}`}
-      className="shad-button_dark_no_h h  group"
+      className="shad-button_dark_no_h  py-2 px-4  h-fit w-fit rounded-md"
       aria-label="Boton editar perfil"
     >
       <img src="/assets/icons/editIcon.svg" alt="logo" />
