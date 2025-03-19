@@ -1,33 +1,33 @@
-import { useParams } from 'react-router-dom'
-import PostForm from '@/components/forms/PostForm'
-import { useGetPostById } from '@/lib/react-query/queriesAndMutations'
-import Loader from '@/components/shared/Loader'
+import { useParams } from "react-router-dom";
+import PostForm from "@/components/forms/PostForm";
+import { useGetPostById } from "@/lib/react-query/queriesAndMutations";
+import Loader from "@/components/shared/Loader";
 
 const EditPost = () => {
-    const { id } = useParams()
-    const { data: post, isPending } = useGetPostById(id || '')
+  const { id } = useParams();
+  const { data: post, isPending } = useGetPostById(id || "");
 
-    if (isPending) return <Loader />
-    return (
-        <div className='flex flex-1'>
-            <div className='common-container '>
-                <div className='max-w-5xl flex gap-3 justify-center align-middle w-full'>
-                    <img
-                        src="/public/assets/icons/add-post.svg"
-                        width={36}
-                        height={36}
-                        alt="add"
-                    />
-                    <h2 className='h3-bold md:h2-bold text-left w-full inline-block'> Edit Post</h2>
-                </div>
-
-                <PostForm action='Update' post={post} />
-
-
-            </div>
-
+  if (isPending) return <Loader />;
+  return (
+    <div className="flex flex-1">
+      <div className="common-container ">
+        <div className="max-w-5xl flex gap-3 justify-center align-middle w-full">
+          <img
+            src="/assets/icons/add-post.svg"
+            width={36}
+            height={36}
+            alt="add"
+          />
+          <h2 className="h3-bold md:h2-bold text-left w-full inline-block">
+            {" "}
+            Edit Post
+          </h2>
         </div>
-    )
-}
 
-export default EditPost
+        <PostForm action="Update" post={post} />
+      </div>
+    </div>
+  );
+};
+
+export default EditPost;
