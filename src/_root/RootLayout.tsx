@@ -9,7 +9,7 @@ import { Loader } from "lucide-react";
 
 function RootLayout() {
   const { pathname } = useLocation();
-  const isAuthenticated = useUserContext();
+  const { isAuthenticated } = useUserContext();
   const navigate = useNavigate();
   console.log(isAuthenticated);
   if (!isAuthenticated) {
