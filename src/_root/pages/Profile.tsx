@@ -42,9 +42,7 @@ const Profile = () => {
           <div className={`flex gap-3  `}>
             <img
               className="h-32 w-32 rounded-full"
-              src={
-                user.imageUrl || "/public/assets/icons/profile-placeholder.svg"
-              }
+              src={user.imageUrl || "/assets/icons/profile-placeholder.svg"}
               alt="profile"
             />
             <div className="flex flex-col">
