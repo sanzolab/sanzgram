@@ -22,6 +22,8 @@ import {
   useSignInAccount,
 } from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext";
+import { AppwriteException } from "appwrite";
+import { INewUser } from "@/types";
 
 function SignUpForm() {
   const { toast } = useToast();
@@ -45,8 +47,17 @@ function SignUpForm() {
   });
 
   // 2. Define a submit handler.
-  async function onSubmit(values: z.infer<typeof SignUpValidation>) {
-    const newUser = await createUserAccount(values);
+  async function onSubmit(values: INewUser) {
+    const newUser: INewUser | AppwriteException = await createUserAccount(
+      values
+    );
+
+    if (newUser instanceof AppwriteException) {
+      return toast({
+        title: newUser.message,
+      });
+    }
+
     if (!newUser) {
       return toast({
         title: "Sign up failed. Please try again",
