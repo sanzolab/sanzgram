@@ -33,6 +33,8 @@ const Profile = () => {
     ? "liked"
     : "posts";
 
+  const isCurrentUser = currentUser?.$id === id;
+
   if (isLoading || isCurrentUserLoading) return <Loader />;
   if (!user) return <div>User not found</div>;
   return (
@@ -50,7 +52,7 @@ const Profile = () => {
               <p className="body-medium text-light-3">@{user.username}</p>
             </div>
           </div>
-          {currentUser?.$id === id ? (
+          {isCurrentUser ? (
             <EditButtonProfile userId={id || ""} />
           ) : (
             <FollowButton user={user} />
@@ -70,12 +72,14 @@ const Profile = () => {
         >
           <TabsList className="grid  grid-cols-2 tab-list p-0 w-[400px]">
             <TabsTrigger
-              className="bg-dark-2  border-2  rounded-r-none rounded-l-md border-[#101012] focus:border-2 active:border-2 focus:border-dark-3 active:border-dark-3 transition-colors duration-300 ease-in-out"
+              className={`bg-dark-2  border-2  ${
+                isCurrentUser ? "rounded-r-none" : "rounded-r-md"
+              } rounded-l-md border-[#101012] focus:border-2 active:border-2 focus:border-dark-3 active:border-dark-3 transition-colors duration-300 ease-in-out`}
               value="posts"
             >
               Posts
             </TabsTrigger>
-            {currentUser?.$id === id && (
+            {isCurrentUser && (
               <TabsTrigger
                 className="bg-dark-2 border-2 rounded-l-none rounded-r-md border-[#101012] focus:border-2 active:border-2 focus:border-dark-3 active:border-dark-3 transition-colors duration-300 ease-in-out"
                 value="liked"
@@ -89,11 +93,15 @@ const Profile = () => {
               index
               element={
                 <TabsContent value="posts" className="w-full">
-                  <Posts username={user.username} posts={user.posts} />
+                  <Posts
+                    username={user.username}
+                    posts={user.posts}
+                    isCurrentUser={isCurrentUser}
+                  />
                 </TabsContent>
               }
             />
-            {currentUser?.$id === id && (
+            {isCurrentUser && (
               <Route
                 path="/liked-posts"
                 element={
