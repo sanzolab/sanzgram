@@ -23,7 +23,7 @@ const LeftSideBar = () => {
       <div className="flex flex-col gap-11">
         <Link to="/" className="flex items-center gap-2">
           <img
-            src="/public/assets/images/sanzgramlogo3-01.svg"
+            src="/assets/images/sanzgramlogo3-01.svg"
             alt="logo"
             width={140}
             height={36}
@@ -37,9 +37,7 @@ const LeftSideBar = () => {
         >
           <img
             className="h-14 w-14 rounded-full"
-            src={
-              user.imageUrl || "/public/assets/icons/profile-placeholder.svg"
-            }
+            src={user.imageUrl || "/assets/icons/profile-placeholder.svg"}
             alt="profile"
           />
           <div className="flex flex-col">
@@ -88,7 +86,7 @@ const LeftSideBar = () => {
             className={`group-hover:opacity-70 group-hover:scale-x-[-1] invert brightness-0 transition ${
               !isAuthenticated && "scale-x-[-1] group-hover:scale-x-[1]"
             }`}
-            src="/public/assets/icons/logout.svg"
+            src="/assets/icons/logout.svg"
             alt="logout"
           />
           <p className="base-medium group-hover:opacity-70">
