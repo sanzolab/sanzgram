@@ -54,7 +54,7 @@ const FileUploader = ({ fieldChange, mediaUrl, type }: FileUploaderProps) => {
         ) : (
           <div className="profile_file_uploader-box">
             <img
-              src="/public/assets/icons/file-upload.svg"
+              src="/assets/icons/file-upload.svg"
               width={96}
               height={77}
               alt="upload a photo"
@@ -77,7 +77,7 @@ const FileUploader = ({ fieldChange, mediaUrl, type }: FileUploaderProps) => {
       ) : (
         <div className="file_uploader-box">
           <img
-            src="/public/assets/icons/file-upload.svg"
+            src="/assets/icons/file-upload.svg"
             width={96}
             height={77}
             alt="upload a photo"
