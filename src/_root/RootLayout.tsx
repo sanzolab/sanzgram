@@ -6,15 +6,22 @@ import TopCreators from "@/_root/pages/TopCreators";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useUserContext } from "@/context/AuthContext";
 import { Loader } from "lucide-react";
+import { useEffect } from "react";
 
 function RootLayout() {
   const { pathname } = useLocation();
-  const { isAuthenticated } = useUserContext();
+  const { isAuthenticated, isLoading } = useUserContext();
   const navigate = useNavigate();
-  console.log(isAuthenticated);
-  if (!isAuthenticated) {
-    navigate("/sign-in");
-  }
+
+  useEffect(() => {
+    if (isLoading) return;
+    if (!isAuthenticated) {
+      navigate("/sign-in");
+    }
+  }, [isAuthenticated, navigate, isLoading]);
+
+  if (isLoading) return <Loader />;
+
   return (
     <div className="w-full md:flex md:flex-row flex flex-col">
       <TopBar />
