@@ -1,14 +1,14 @@
 function Loader({ width = 24, height = 24 }) {
-    return (
-        <div className='flex-center w-full'>
-            <img
-                src='/public/assets/icons/loader.svg'
-                alt='loader'
-                width={width}
-                height={height}
-            />
-        </div>
-    )
+  return (
+    <div className="flex-center w-full">
+      <img
+        src="/assets/icons/loader.svg"
+        alt="loader"
+        width={width}
+        height={height}
+      />
+    </div>
+  );
 }
 
-export default Loader
+export default Loader;
