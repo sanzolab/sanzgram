@@ -1,8 +1,19 @@
+import Loader from "@/components/shared/Loader";
 import { useUserContext } from "@/context/AuthContext";
-import { Outlet, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 
 function AuthLayout() {
-  const { isAuthenticated } = useUserContext();
+  const { isAuthenticated, isLoading } = useUserContext();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isLoading) return;
+    if (!isAuthenticated) {
+      navigate("/sign-in");
+    }
+  }, [isAuthenticated, navigate, isLoading]);
+
+  if (isLoading) return <Loader />;
   return (
     <>
       {isAuthenticated ? (
