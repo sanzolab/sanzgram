@@ -8,10 +8,7 @@ function AuthLayout() {
   const navigate = useNavigate();
   useEffect(() => {
     if (isLoading) return;
-    if (!isAuthenticated) {
-      navigate("/sign-in");
-    }
-  }, [isAuthenticated, navigate, isLoading]);
+  }, [isLoading]);
 
   if (isLoading) return <Loader />;
   return (
