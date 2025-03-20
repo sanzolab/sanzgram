@@ -15,7 +15,6 @@ const UpdateProfile = () => {
   } = useUserContext();
 
   const [loadingInitial, setLoadingInitial] = useState(true);
-
   useEffect(() => {
     if (isUserLoading === null || isUserAuthenticated === null) {
       return;
