@@ -48,7 +48,6 @@ function SignUpForm() {
 
   // 2. Define a submit handler.
   async function onSubmit(values: INewUser) {
-
     const newUser: INewUser | AppwriteException = await createUserAccount(
       values
     );
@@ -74,6 +73,7 @@ function SignUpForm() {
       return toast({ title: "Sign In failed. Please try again" });
     }
     const isLoggedIn = await checkAuthUser();
+    console.log(isLoggedIn);
     if (isLoading) return <Loader />;
 
     if (isLoggedIn) {
