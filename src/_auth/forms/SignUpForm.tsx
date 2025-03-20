@@ -48,6 +48,7 @@ function SignUpForm() {
 
   // 2. Define a submit handler.
   async function onSubmit(values: INewUser) {
+
     const newUser: INewUser | AppwriteException = await createUserAccount(
       values
     );
@@ -151,7 +152,7 @@ function SignUpForm() {
             {isCreatingAccount ? (
               <div className="flex-center gap-2">
                 {" "}
-                <Loader /> Loading...
+                <Loader />
               </div>
             ) : (
               "Sign up"
