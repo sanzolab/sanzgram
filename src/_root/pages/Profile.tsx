@@ -40,15 +40,17 @@ const Profile = () => {
   return (
     <div className="profile-container ">
       <div>
-        <div className="flex gap-10 ">
+        <div className="flex gap-3 sm:gap-10 ">
           <div className={`flex gap-3  `}>
             <img
-              className="h-32 w-32 rounded-full"
+              className="w-15 h-16 sm:w-20 sm:h-20 md:h-32 md:w-32 rounded-full"
               src={user.imageUrl || "/assets/icons/profile-placeholder.svg"}
               alt="profile"
             />
             <div className="flex flex-col">
-              <p className="body h1-bold">{user.name}</p>
+              <p className="body font-bold text-xl sm:text-2xl lg:h2-bold">
+                {user.name}
+              </p>
               <p className="body-medium text-light-3">@{user.username}</p>
             </div>
           </div>
