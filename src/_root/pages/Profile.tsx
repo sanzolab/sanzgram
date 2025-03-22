@@ -54,16 +54,17 @@ const Profile = () => {
               <p className="body-medium text-light-3">@{user.username}</p>
             </div>
           </div>
+
           {isCurrentUser ? (
             <EditButtonProfile userId={id || ""} />
           ) : (
             <FollowButton user={user} />
           )}
         </div>
-
+        <p className="mt-4">{user.bio && user.bio}</p>
         <Tabs
           defaultValue={currentTab}
-          className=" mt-12"
+          className=" mt-6"
           onValueChange={(value) =>
             navigate(
               value === "liked"
