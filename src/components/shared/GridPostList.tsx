@@ -2,7 +2,7 @@ import { useUserContext } from "@/context/AuthContext";
 import { Models } from "appwrite";
 import { Link } from "react-router-dom";
 import PostStats from "./PostStats";
-import { Loader } from "lucide-react";
+import Loader from "./Loader";
 
 type GridPostsProps = {
   posts: Models.Document[] | Models.Document | undefined;
