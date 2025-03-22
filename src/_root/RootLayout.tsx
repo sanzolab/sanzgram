@@ -5,8 +5,8 @@ import TopCreators from "@/_root/pages/TopCreators";
 
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useUserContext } from "@/context/AuthContext";
-import { Loader } from "lucide-react";
 import { useEffect } from "react";
+import Loader from "@/components/shared/Loader";
 
 function RootLayout() {
   const { pathname } = useLocation();
