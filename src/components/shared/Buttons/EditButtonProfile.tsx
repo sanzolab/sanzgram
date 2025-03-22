@@ -13,7 +13,7 @@ const EditButtonProfile = ({ userId }: EditButtonProps) => {
       aria-label="Boton editar perfil"
     >
       <img src="/assets/icons/editIcon.svg" alt="logo" />
-      <p className="subtle-semibold">Edit Profile</p>
+      <p className="subtle-semibold text-nowrap">Edit Profile</p>
     </Link>
   );
 };
