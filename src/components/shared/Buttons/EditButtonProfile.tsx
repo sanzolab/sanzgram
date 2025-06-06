@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 
-import editIcon from "assets/icons/editIcon.svg";
-
 type EditButtonProps = {
   userId: string;
 };
