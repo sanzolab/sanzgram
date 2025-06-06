@@ -146,13 +146,23 @@ export async function createPost(post: INewPost) {
 
     const fileUrl = getFilePreview(uploadedFile.$id);
 
-    if (!fileUrl) {
+    const fileUrlWithOutTransformation = storage.getFileView(
+      appwriteConfig.storageId,
+      uploadedFile.$id
+    ).href;
+
+    if (!fileUrl || !fileUrlWithOutTransformation) {
       await deleteFile(uploadedFile.$id);
       throw Error;
     }
 
     //tags to array
     const tags = post.tags?.replace(/ /g, "").split(",") || [];
+
+    console.log(
+      "post",
+      storage.getFileView(appwriteConfig.storageId, uploadedFile.$id)
+    );
 
     //post to database
     const newPost = await databases.createDocument(
@@ -162,7 +172,7 @@ export async function createPost(post: INewPost) {
       {
         creator: post.userId,
         caption: post.caption,
-        imageUrl: fileUrl,
+        imageUrl: fileUrlWithOutTransformation,
         imageId: uploadedFile.$id,
         location: post.location,
         tags: tags,
@@ -377,12 +387,22 @@ export async function updatePost(post: IUpdatePost) {
 
       const fileUrl = getFilePreview(uploadedFile.$id);
 
-      if (!fileUrl) {
+      const fileUrlWithOutTransformation = storage.getFileView(
+        appwriteConfig.storageId,
+        uploadedFile.$id
+      ).href;
+
+      if (!fileUrl || !fileUrlWithOutTransformation) {
         await deleteFile(uploadedFile.$id);
         throw Error;
       }
 
-      image = { ...image, imageUrl: fileUrl, imageId: uploadedFile.$id };
+      // image = { ...image, imageUrl: fileUrl, imageId: uploadedFile.$id };
+      image = {
+        ...image,
+        imageUrl: new URL(fileUrlWithOutTransformation),
+        imageId: uploadedFile.$id,
+      };
     }
 
     //tags to array
@@ -395,6 +415,7 @@ export async function updatePost(post: IUpdatePost) {
       post.postId,
       {
         caption: post.caption,
+        // imageUrl: image.imageUrl,
         imageUrl: image.imageUrl,
         imageId: image.imageId,
         location: post.location,
@@ -404,6 +425,10 @@ export async function updatePost(post: IUpdatePost) {
     if (!updatedPost) {
       await deleteFile(post.imageId);
       throw Error;
+    }
+
+    if (hasFileToUpdate && post.imageId && post.imageId !== image.imageId) {
+      await deleteFile(post.imageId);
     }
 
     return updatedPost;
