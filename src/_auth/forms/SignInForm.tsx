@@ -100,7 +100,7 @@ function SignInForm() {
             {isSigningIn ? (
               <div className="flex-center gap-2">
                 {" "}
-                <Loader /> Loading...
+                <Loader />
               </div>
             ) : (
               "Sign in"
