@@ -23,7 +23,7 @@ const LeftSideBar = () => {
       <div className="flex flex-col gap-11">
         <Link to="/" className="flex items-center gap-2">
           <img
-            src="/assets/images/sanzgramlogo3-01.svg"
+            src="/assets/images/logo-sanzgram.svg"
             alt="logo"
             width={140}
             height={36}
